@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
    s.name	= 'known_item_search_classifier'
    s.summary	= 'A ruby gem that classifies search query strings as either known-item searches or unknown-item searches'
-   s.version	= '0.2.0'
+   s.version	= '0.2.1'
    s.date	= '2017-03-25'
    s.description	= 'Classify search query strings'
    s.authors	= ['Jane Sandberg']

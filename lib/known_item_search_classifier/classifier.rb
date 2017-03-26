@@ -4,7 +4,6 @@ require 'gaussian_naive_bayes'
 
 module KnownItemSearchClassifier
     class Classifier
-        attr_accessor :custom_training_set
         def initialize
             set = DefaultTrainingSet.new
             @default_training_set = GaussianNaiveBayes::Classifier.new set.categories_summaries, set.categories_probabilities
