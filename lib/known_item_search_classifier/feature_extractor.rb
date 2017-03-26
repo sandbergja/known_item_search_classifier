@@ -12,13 +12,14 @@ module KnownItemSearchClassifier
             @punctuation_ratio = punctuation_ratio
             @determiner_ratio = determiner_ratio
             @proper_noun_ratio = proper_noun_ratio
+            @numeric_count = numeric_count
 
             #@num_keywords = count_keywords
             #@refers_to_an_item_that_is_known = check_against_known_titles
             
         end
         def feature_array
-            return [@mixed_case, @punctuation_ratio, @determiner_ratio, @proper_noun_ratio, @num_words]
+            return [@mixed_case, @punctuation_ratio, @determiner_ratio, @proper_noun_ratio, @num_words, @numeric_count]
         end
         private
         def is_mixed_case?
@@ -34,6 +35,9 @@ module KnownItemSearchClassifier
         def determiner_ratio
             num_det = @tagged.scan(/\/DET/).size.to_f
             return num_det / @num_words
+        end
+        def numeric_count
+            return @string.scan(/[0-9]/).length
         end
         def proper_noun_ratio
             num_prop_noun = @tagged.scan(/\/NNP/).size.to_f
@@ -55,6 +59,7 @@ module KnownItemSearchClassifier
         end
         def check_against_known_titles
            known_titles = [
+               'fountainhead',
                'salt sugar fat',
            ]
            if known_titles.include? @query_string.downcase

@@ -1,8 +1,10 @@
 # Classifies search strings as either known-item searches or unknown-item searches
+require 'csv'
 require 'gaussian_naive_bayes'
 
 module KnownItemSearchClassifier
     class Classifier
+        attr_accessor :custom_training_set
         def initialize
             set = DefaultTrainingSet.new
             @default_training_set = GaussianNaiveBayes::Classifier.new set.categories_summaries, set.categories_probabilities
@@ -11,7 +13,7 @@ module KnownItemSearchClassifier
             return classify query_string
         end
         def train training_set
-            if defined? @custom_training_set
+            unless defined? @custom_training_set
                 @custom_training_set = GaussianNaiveBayes::Learner.new
             end
             training_set.each do |query|
@@ -19,10 +21,10 @@ module KnownItemSearchClassifier
             end
         end
         def train_from_csv filename
-            if defined? @custom_training_set
+            unless defined? @custom_training_set
                 @custom_training_set = GaussianNaiveBayes::Learner.new
             end
-            csv = CSV.read(filename)
+            csv = ::CSV.read(filename)
             csv.each do |line|
                 submit_vector line
             end
