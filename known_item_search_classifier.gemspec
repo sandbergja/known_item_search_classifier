@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.name	= 'known_item_search_classifier'
   s.summary	= 'A ruby gem that classifies search query strings as either known-item searches or unknown-item searches'
-  s.version	= '0.3.0'
+  s.version	= '0.3.1'
   s.date	= '2024-11-06'
   s.description	= 'Classify search query strings'
   s.authors	= ['Jane Sandberg']

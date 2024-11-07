@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Classifies search strings as either known-item searches or unknown-item searches
 require 'csv'
 require 'gaussian_naive_bayes'
@@ -29,9 +31,9 @@ module KnownItemSearchClassifier
       end
     end
 
-    private
+    attr_reader :custom_training_set
 
-    attr_reader :custom_tr
+    private
 
     def classify(string)
       f = FeatureExtractor.new string
@@ -43,7 +45,7 @@ module KnownItemSearchClassifier
         query_class = @default_training_set.classify(feature_array)
       end
       return query_class
-      return true if :known == query_class
+      return true if query_class == :known
 
       false
     end

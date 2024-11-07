@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 module KnownItemSearchClassifier
   class DefaultTrainingSet
-    attr_reader :categories_probabilities, :categories_summaries
+    def categories_probabilities
+      { 'unknown' => 0.552, 'known' => 0.448 }
+    end
 
-    def initialize
-      @categories_probabilities = { 'known' => 0.3333333333333333, 'unknown' => 0.6666666666666666 }
-      @categories_summaries =
-        { 'known' =>
-          { 0 => { mean: 0.6, standard_deviation: 0.5 },
-            1 => { mean: 0.0516060606060606, standard_deviation: 0.09910312916958242 },
-            2 => { mean: 0.06633333333333333, standard_deviation: 0.13412266359153804 },
-            3 => { mean: 0.2575454545454545, standard_deviation: 0.27976953051588926 },
-            4 => { mean: 4.76, standard_deviation: 3.8867295592395754 },
-            5 => { mean: 3.48, standard_deviation: 4.91697739131132 } },
-          'unknown' =>
-          { 0 => { mean: 0.18, standard_deviation: 0.38808793449160356 },
-            1 => { mean: 0.03966666666666667, standard_deviation: 0.1241245990920947 },
-            2 => { mean: 0.009000000000000001, standard_deviation: 0.04482391854210637 },
-            3 => { mean: 0.11, standard_deviation: 0.25134558515041244 },
-            4 => { mean: 2.44, standard_deviation: 1.0720950308167836 },
-            5 => { mean: 0.14, standard_deviation: 0.7001457574195914 } } }
+    def categories_summaries
+      { 'unknown' =>
+    { 0 => { mean: 0.34782608695652173, standard_deviation: 0.4774351058385226 },
+      1 => { mean: 0.024483651893859832, standard_deviation: 0.09877772267472562 },
+      2 => { mean: 0.004589371980676328, standard_deviation: 0.032912070012630565 },
+      3 => { mean: 0.23732759224252611, standard_deviation: 0.3775861432826544 },
+      4 => { mean: 2.5072463768115942, standard_deviation: 1.7511981064219535 },
+      5 => { mean: 0.05314009661835749, standard_deviation: 0.44293515127930905 } },
+        'known' =>
+    { 0 => { mean: 0.6011904761904762, standard_deviation: 0.49111727628992086 },
+      1 => { mean: 0.05071208898451003, standard_deviation: 0.10551578513388955 },
+      2 => { mean: 0.043913293286663324, standard_deviation: 0.089967379556707 },
+      3 => { mean: 0.24845155590636964, standard_deviation: 0.3038306400149365 },
+      4 => { mean: 5.071428571428571, standard_deviation: 4.292552286529769 },
+      5 => { mean: 2.8214285714285716, standard_deviation: 4.933475325294178 } } }
     end
   end
 end

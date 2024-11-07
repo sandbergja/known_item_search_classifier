@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'engtagger'
 
 module KnownItemSearchClassifier
@@ -25,7 +27,7 @@ module KnownItemSearchClassifier
     private
 
     def is_mixed_case?
-      return 1.0 if @string =~ /[A-Z]/ and @string =~ /[a-z]/
+      return 1.0 if @string =~ (/[A-Z]/) && @string =~ (/[a-z]/)
 
       0.0
     end

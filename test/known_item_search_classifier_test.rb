@@ -1,46 +1,148 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require './lib/known_item_search_classifier'
 
 class KnownItemSearchClassifierTest < Minitest::Test
   classifier = KnownItemSearchClassifier::Classifier.new
 
-  known_item_training_set = [
-    # 'hobbit first edition',  -- classifier incorrectly classifies this as unknown
-    # 'my soul is rested',  -- classifier incorrectly classifies this as unknown
-    # 'new yorker',  -- classifier incorrectly classifies this as unknown
-    # 'when harry met sally', -- classifier incorrectly classifies this as unknown
-    # '"neo tekunoroji"',  -- classifier incorrectly classifies this as unknown
-    '99131236427206421',
-    'A decision making model for selecting start-up businesses in a government venture capital scheme',
-    # 'Dostoevsky Brothers Karamazov', -- classifier incorrectly classifies this as unknown
-    # 'Lawrence Classic American Literature', -- classifier incorrectly classifies this as unknown
-    # 'salt sugar fat', -- classifier incorrectly classifies this as unknown
-    'Robinson Ken. Creative Schools: The Grassroots Revolution That’s Transforming Eduction.  Viking. 2015. Print',
-    'the inconvenient truth',
-    'Polarization: What Everyone Needs to Know',
-    'little house on the'
+  known_items = [
+    '0036-8075',
+    '9781324033356',
+    'British Documents on the End of Empire',
+    '9780393979503',
+    '9781319339425',
+    'D810.W7 A5313 2017b',
+    '9783031512117',
+    '9780470044377',
+    '9780393609615',
+    'AC8 .B4353 1979',
+    # 'Kafka metamorphosis',
+    # 'how children develop',
+    # 'milton\'s paradise lost',
+    '9780471140260',
+    # 'Fortaleciendo la participación política de las mujeres',
+    # 'historia augusta',
+    # 'karl marx letters',
+    # 'stuck in place',
+    'Court and Country: Studies in Tudor Social History',
+    'E184.6 .L48 2009',
+    'JK274 .K62 1995',
+    'JZ1480 .H68 2013',
+    'TD186.5.B35 A4413 2016',
+    'Women and gender issues in Bolivia, II, 1991-2003.',
+    # 'arrow of god',
+    # 'going stealth',
+    # 'greek dictionary brill',
+    # 'historia de los indios motolinia',
+    '9780143115267',
+    '9780321573513',
+    '9788498956160',
+    'AC25 .B3132 1972b',
+    'Agrarian issues in Bolivia, I, 1989-2004.',
+    'Indigenous peoples, peasants, and ethnic minorities in Bolivia, I, 1970-2005.',
+    'MT6 .C57 2016',
+    # 'Plato\'s symposium',
+    'le droit a la ville',
+    # 'providence journal',
+    'the atlantic',
+    '9780137605521',
+    '9788876768170',
+    # 'Book of Mormon',
+    # 'Euclid\'s elements'
   ]
-  known_item_training_set.each do |query|
+  known_items.each do |query|
     cleaned_up_query = query.gsub(/[[:punct:]]/, '').gsub(/[[:space:]]/, '_')
     define_method("test_#{cleaned_up_query}_is_classified_as_known_item") do
       assert_equal(:known, classifier.is_known_item_search?(query).to_sym)
     end
   end
 
-  unknown_item_training_set = [
-    'colonial mexico textiles',
-    'history of horses',
-    'medical expertise COVID',
-    'music and sexuality',
-    'paper industry',
-    'sun ra',
-    # 'concussions after the nfl', -- classifier incorrectly classifies this as known
-    'Professional baking ',
-    'Manos chatzidakis',
-    'whey protein',
-    'benefits of eating healthyhy'
+  unknown_items = [
+    '"paul parin"',
+    'architecture new orleans',
+    'Al-alusi',
+    'animals NOT coin / ',
+    'hanne darboven',
+    'William Burroughs',
+    'Platonic eros',
+    'cavafy',
+    'Marcel proust',
+    'Zisterzienser',
+    'costume',
+    'cultural delegation',
+    'Akhir al-Zaman',
+    'Heidegger',
+    'Nietzsche',
+    'Wind in poetry',
+    'argentina',
+    'facades architecture',
+    'medieval women',
+    'monrovia urbanization',
+    'philadelphia',
+    'roman theater',
+    'Holderline',
+    'Wittgenstein',
+    'hindi history politics',
+    'post-industrial society',
+    'Luxemburg',
+    'Tasso',
+    'Women in Scandinavia',
+    'corporate governance',
+    'dance technique',
+    'water atlas',
+    'Diskin Clay',
+    'charlotte posenenske',
+    'dinosaur',
+    'paul rudolph',
+    'urdu hindi history',
+    'Ashrat al',
+    'Ephemera',
+    'John Hopfield',
+    'Russian formalism',
+    'artificial intelligence',
+    'bats',
+    # 'coffee and the american revolution',
+    'cold war middle east',
+    'environmental history ethiopia',
+    'indigenous',
+    'politbiuro',
+    'stoicism',
+    'suetonius',
+    'tokyo edo',
+    'washington dc',
+    'Achaean war',
+    'Isabella piccini',
+    'Renato Sollima',
+    'animals',
+    'auguste leroux',
+    'blockchain',
+    'britain navy diary',
+    'fairy',
+    'jose guadalupe posada',
+    'lesbian',
+    'physics textbook',
+    'walter benjamin',
+    '"Middlebury College Museum of Art"',
+    '"daniel catan"',
+    'Hellenistic kingdoms',
+    'Albrecht Classen',
+    'Athir al-din al-abhari',
+    'Berlin',
+    'David konstan',
+    'Elizabeth Cary Mariam',
+    'Euclid',
+    'George sand on literature',
+    'Kyrgyz art',
+    'Slavic folklore',
+    'mass incarceration california',
+    'military history korean war',
+    'snakes',
+    'sondheim',
+    '"bronx"',
+    'Between Hermon and Sinai'
   ]
-  unknown_item_training_set.each do |query|
+  unknown_items.each do |query|
     cleaned_up_query = query.gsub(/[[:punct:]]/, '').gsub(/[[:space:]]/, '_')
     define_method("test_#{cleaned_up_query}_is_not_false_positive") do
       assert_equal(:unknown, classifier.is_known_item_search?(query).to_sym)
